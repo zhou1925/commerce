@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+{% load thumbnail %}
+
+{% block title %}Shoppping cart{% endblock title %}
+
+{% block content %}
+
+
+    <!-- Shoping Cart Section Begin -->
+    <section class="shoping-cart">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="shoping__cart__table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="shoping__product">{% trans 'Products' %}</th>
+                                    <th>{% trans 'Price' %}</th>
+                                    <th>{% trans 'Quantity' %}</th>
+
+                                    <th>Total</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in cart %}
+                                {% with product=item.product %}
+
+                                <tr>
+
+                                    <td class="shoping__cart__item">
+                                        <img src="
+                                        {% if product.image %}{% thumbnail product.image 100x100 %}
+                                        {% else %}{% static 'img/no_image.png' %}{% endif %}" alt="">
+                                        <a href="{{ product.get_absolute_url }}">
+                                            <h5>{{ product.name }}</h5>
+                                        </a>
+                                    </td>
+
+                                    <td class="shoping__cart__price">
+                                        ${{ item.price }}
+                                    </td>
+
+                                    <td class="shoping__cart__quantity">
+                                        <div class="quantity">
+
+                                        <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                                            {% csrf_token %}
+                                            {{ item.update_quantity_form.quantity }}
+                                            {{ item.update_quantity_form.override }}
+                                            <button class="primary-btn btn-group-sm">{% trans 'Update' %}</button>
+
+                                        </form>
+
+                                        </div>
+
+
+                                    </td>
+
+                                    <td class="shoping__cart__total">
+                                        ${{ item.total_price }}
+                                    </td>
+
+                                    <td class="shoping__cart__item__close">
+                                        <form action="{% url 'cart:cart_remove' product.id %}"
+                                        method="post">
+                                            {% csrf_token %}
+                                            <span><input class="btn" type="submit" value="x"></span>
+                                        </form>
+
+                                    </td>
+                                </tr>
+                                {% endwith %}
+                                {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="shoping__cart__btns">
+                        <a href="{% url 'shop:product_list' %}" class="primary-btn cart-btn">{% trans 'CONTINUE SHOPPING' %}</a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="shoping__continue">
+                        <div class="shoping__discount">
+                            <h5>{% trans 'Discount Codes' %}</h5>
+                            <form action="{% url 'coupons:apply' %}" method="post">
+                                {% csrf_token %}
+                                {{ coupon_apply_form }}
+                                <button type="submit" class="site-btn"">
+                                {% trans 'Apply' %}</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="shoping__checkout">
+                        <h5>{% trans 'Cart Total' %}</h5>
+                        <ul>
+                            {% if cart.coupon %}
+                            <li>{% trans 'Subtotal' %} <span>${{ cart.get_total_price }}</span></li>
+                            <li>{% trans 'Discount' %} <span>
+                                {% blocktrans with discount=cart.coupon.discount %}
+                                {{ discount }}%
+                                {% endblocktrans %}
+                            </span></li>
+                            <li>- <span>${{ cart.get_discount|floatformat:2 }}</span></li>
+                            <li>Total <span>${{ cart.get_total_price_after_discount|floatformat:2 }}</span></li>
+                            {% else %}
+                            <li>Total <span>${{ cart.get_total_price }}</span></li>
+                            {% endif %}
+                        </ul>
+                        <a href="{% url 'orders:order_create' %}" class="primary-btn">{% trans 'PROCEED TO CHECKOUT' %}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Shoping Cart Section End -->
+
+{% endblock %}

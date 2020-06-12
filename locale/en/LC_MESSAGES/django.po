@@ -1,0 +1,207 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-06-07 16:54-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\cart\forms.py:15 .\templates\cart\shoping-cart.html:22
+msgid "Quantity"
+msgstr ""
+
+#: .\commerce\settings.py:181
+msgid "English"
+msgstr ""
+
+#: .\commerce\settings.py:182
+msgid "Spanish"
+msgstr ""
+
+#: .\commerce\urls.py:26
+msgid "admin/"
+msgstr ""
+
+#: .\commerce\urls.py:27
+msgid "orders/"
+msgstr ""
+
+#: .\commerce\urls.py:28
+msgid "cart/"
+msgstr ""
+
+#: .\commerce\urls.py:31
+msgid "payment/"
+msgstr ""
+
+#: .\commerce\urls.py:32
+msgid "coupons/"
+msgstr ""
+
+#: .\commerce\urls.py:33
+msgid "accounts/"
+msgstr ""
+
+#: .\coupons\forms.py:6
+msgid "Coupon"
+msgstr ""
+
+#: .\orders\models.py:10
+msgid "first name"
+msgstr ""
+
+#: .\orders\models.py:12
+msgid "last name"
+msgstr ""
+
+#: .\orders\models.py:14
+msgid "country"
+msgstr ""
+
+#: .\orders\models.py:16
+msgid "address"
+msgstr ""
+
+#: .\orders\models.py:18
+msgid "city"
+msgstr ""
+
+#: .\orders\models.py:20
+msgid "country/state"
+msgstr ""
+
+#: .\orders\models.py:22
+msgid "postal code"
+msgstr ""
+
+#: .\orders\models.py:24
+msgid "phone"
+msgstr ""
+
+#: .\orders\models.py:26
+msgid "email"
+msgstr ""
+
+#: .\orders\models.py:27
+msgid "paid"
+msgstr ""
+
+#: .\orders\urls.py:8
+msgid "checkout/"
+msgstr ""
+
+#: .\payments\urls.py:8
+msgid "process/"
+msgstr ""
+
+#: .\payments\urls.py:9
+msgid "done/"
+msgstr ""
+
+#: .\payments\urls.py:10
+msgid "canceled/"
+msgstr ""
+
+#: .\templates\cart\shoping-cart.html:20
+msgid "Products"
+msgstr ""
+
+#: .\templates\cart\shoping-cart.html:21
+msgid "Price"
+msgstr ""
+
+#: .\templates\cart\shoping-cart.html:54
+msgid "Update"
+msgstr ""
+
+#: .\templates\cart\shoping-cart.html:87
+msgid "CONTINUE SHOPPING"
+msgstr ""
+
+#: .\templates\cart\shoping-cart.html:93
+msgid "Discount Codes"
+msgstr ""
+
+#: .\templates\cart\shoping-cart.html:98
+msgid "Apply"
+msgstr ""
+
+#: .\templates\cart\shoping-cart.html:105
+msgid "Cart Total"
+msgstr ""
+
+#: .\templates\cart\shoping-cart.html:108
+msgid "Subtotal"
+msgstr ""
+
+#: .\templates\cart\shoping-cart.html:109
+msgid "Discount"
+msgstr ""
+
+#: .\templates\cart\shoping-cart.html:110
+#, python-format
+msgid ""
+"\n"
+"                                %(discount)s%%\n"
+"                                "
+msgstr ""
+
+#: .\templates\cart\shoping-cart.html:120
+msgid "PROCEED TO CHECKOUT"
+msgstr ""
+
+#: .\templates\header.html:33 .\templates\header.html:104
+msgid "Language"
+msgstr ""
+
+#: .\templates\header.html:52 .\templates\header.html:135
+msgid "Shop"
+msgstr ""
+
+#: .\templates\header.html:56
+msgid "Cart"
+msgstr ""
+
+#: .\templates\header.html:62
+msgid "Contact"
+msgstr ""
+
+#: .\templates\header.html:75 .\templates\header.html:90
+msgid "Free Shipping for all Order of"
+msgstr ""
+
+#: .\templates\orders\checkout.html:13
+msgid "Billing Details"
+msgstr ""
+
+#: .\templates\orders\checkout.html:194
+msgid "PLACE ORDER"
+msgstr ""
+
+#: .\templates\shop\shop-details.html:75
+msgid "Add to cart"
+msgstr ""
+
+#: .\templates\shop\shop-details.html:79
+msgid "Availability"
+msgstr ""
+
+#: .\templates\shop\shop-details.html:80
+msgid "Shpping"
+msgstr ""
+
+#: .\templates\shop\shop-details.html:80
+msgid "day shipping"
+msgstr ""

@@ -1,0 +1,204 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+Checkout
+{% endblock title %}
+
+{% block content %}
+    <!-- Checkout Section Begin -->
+    <section class="checkout spad">
+        <div class="container">
+            <div class="checkout__form">
+                <h4>{% trans 'Billing Details' %}</h4>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-lg-8 col-md-6">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <div class="form-group">
+                                            {{ form.first_name.label_tag }}
+                                            <input
+                                            type="text"
+                                            class="form-control {% if form.first_name.errors %}
+                                            is-invalid{% endif %}"
+                                            id="id_first_name"
+                                            name="first_name"
+                                            placeholder="Your name">
+                                            {% if form.first_name.errors %}
+                                            <div class="invalid-feedback">
+                                                {{ form.first_name.errors }}
+                                            </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <div class="from-group">
+                                        {{ form.last_name.label_tag }}
+                                            <input type="text"
+                                            class="form-control {% if form.last_name.errors %}
+                                            is-invalid{% endif %}"
+                                            id="id_last_name"
+                                            name="last_name"
+                                            placeholder="Your last name">
+                                            {% if form.last_name.errors %}
+                                            <div class="invalid-feedback">
+                                                {{ form.last_name.errors }}
+                                            </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="checkout__input">
+                                <div class="form-group">
+                                {{ form.country.label_tag }}
+                                    <input type="text"
+                                    class="form-control {% if form.country.errors %}
+                                    is-invalid{% endif %}"
+                                    id="id_country"
+                                    name="country"
+                                    placeholder="Your country">
+                                    {% if form.country.errors %}
+                                    <div class="invalid-feedback">
+                                        {{ form.country.errors }}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="checkout__input">
+                                <div class="form-group">
+                                {{ form.address.label_tag }}
+                                    <input type="text"
+                                    class="form-control {% if form.address.errors %}
+                                    is-invalid{% endif %}"
+                                    id="id_address"
+                                    name="address"
+                                    placeholder="Your address">
+                                    {% if form.address.errors %}
+                                    <div class="invalid-feedback">
+                                        {{ form.address.errors }}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="checkout__input">
+                                <div class="form-group">
+                                {{ form.city.label_tag }}
+                                    <input type="text"
+                                    class="form-control {% if form.city.errors %}
+                                    is-invalid{% endif %}"
+                                    id="id_city"
+                                    name="city"
+                                    placeholder="Your city">
+                                    {% if form.city.errors %}
+                                    <div class="invalid-feedback">
+                                        {{ form.city.errors }}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="checkout__input">
+                                <div class="form-group">
+                                    {{ form.country_state.label_tag }}
+                                    <input type="text"
+                                    class="form-control {% if form.country.errors %}
+                                    is-invalid{% endif %}"
+                                    id="id_country_state"
+                                    name="country_state"
+                                    placeholder="Your country/state">
+                                    {% if form.country_state.errors %}
+                                    <div class="invalid-feedback">
+                                        {{ form.country_state.errors }}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="checkout__input">
+                                <div class="form-group">
+                                {{ form.postal_code.label_tag }}
+                                    <input type="text"
+                                    class="form-control {% if form.postal_code.errors %}
+                                    is-invalid{% endif %}"
+                                    id="id_postal_code"
+                                    name="postal_code"
+                                    placeholder="Your postal code">
+                                    {% if form.postal_code.errors %}
+                                    <div class="invalid-feedback">
+                                        {{ form.postal_code.errors }}
+                                    </div>
+                                    {% endif %}
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <div class="form-group">
+                                    {{ form.phone.label_tag }}
+                                    <input type="text"
+                                    class="form-control {% if form.phone.errors %}
+                                    is-invalid{% endif %}"
+                                    id="id_phone"
+                                    name="phone"
+                                    placeholder="Your phone">
+                                            {% if form.phone.errors %}
+                                            <div class="invalid-feedback">
+                                                {{ form.phone.errors }}
+                                            </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                {{ form.email.label_tag }}
+                                    <input type="email"
+                                    class="form-control {% if form.email.errors %}
+                                    is-invalid{% endif %}"
+                                            id="id_email"
+                                            name="email"
+                                            placeholder="Your email"
+                                            >
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6">
+                            <div class="checkout__order">
+                                <h4>Your Order</h4>
+                                <div class="checkout__order__products">Products <span>Total</span></div>
+                                <ul>
+                                    {% for item in cart %}
+                                    <li>{{ item.product.name }}<span>${{ item.total_price }}</span></li>
+
+                                    {% endfor %}
+                                </ul>
+                                {% if cart.coupon %}
+                                <div class="checkout__order__total">Subtotal <span>${{ cart.get_total_price }}</span></div>
+                                <div class="checkout__order__total">Discount <span>%{{ cart.coupon.discount }}</span></div>
+                                <div class="checkout__order__total">- <span>${{ cart.get_discount|floatformat:2 }}</span></div>
+                                <div class="checkout__order__total">Total <span>${{ cart.get_total_price_after_discount|floatformat:2 }}</span></div>
+                                {% else %}
+                                <div class="checkout__order__subtotal">Total <span>${{ cart.get_total_price }}</span></div>
+
+                                {% endif %}
+
+                                <button type="submit" class="site-btn">{% trans 'PLACE ORDER' %}</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <!-- Checkout Section End -->
+
+{% endblock content %}

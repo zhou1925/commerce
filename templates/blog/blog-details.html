@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load blog_tags %}
+{% load thumbnail %}
+
+
+{% block content %}
+
+    <!-- Blog Details Hero Begin -->
+    <section class="blog-details-hero set-bg" data-setbg="{% static 'img/blog/details/details-hero.jpg' %}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="blog__details__hero__text">
+                        <h2>{{ post.title }}</h2>
+                        <ul>
+                            <li>{{ post.author }}</li>
+                            <li>{{ post.publish }}</li>
+                            {% with comments.count as total_comments %}
+                            <li>{{ total_comments }} comment{{ total_comments|pluralize }}</li>
+                            {% endwith %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Details Hero End -->
+
+    <!-- Blog Details Section Begin -->
+    <section class="blog-details spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-7 order-md-1 order-1">
+                    <div class="blog__details__text">
+                        <img src="{% if post.image %}{{ post.image.url }}{% endif %}" alt="">
+                        <p>{{ post.body|markdown }}</p>
+
+                    </div>
+
+                    <div class="blog__details__content">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="blog__details__author">
+                                    <div class="blog__details__author__pic">
+                                        <img src="img/blog/details/details-author.jpg" alt="">
+                                    </div>
+                                    <div class="blog__details__author__text">
+                                        <h6>{{ post.author }}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="blog__details__widget">
+                                    <ul>
+                                        <li><span>Categories:</span> Food</li>
+                                        <li><span>Tags:</span>{{ post.tags.all|join:"," }}</li>
+                                    </ul>
+                                    <div class="blog__details__social">
+                                        <a href="#"><i class="fa fa-facebook"></i></a>
+                                        <a href="#"><i class="fa fa-twitter"></i></a>
+                                        <a href="#"><i class="fa fa-google-plus"></i></a>
+                                        <a href="#"><i class="fa fa-linkedin"></i></a>
+                                        <a href="#"><i class="fa fa-envelope"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="container">
+                    {% if comments %}
+                    {% for comment in comments %}
+                        <div class="card">
+                          <div class="card-header">
+                            {{ comment.name }} {{ comment.created}}
+                          </div>
+                          <div class="card-body">
+                              <p class="cart-text">{{ comment.body }}</p>
+
+                          </div>
+                        </div>
+                    <br>
+                        <a class="more-comment-btn" href="#"><b>VIEW MORE COMMENTS</a>
+                    {% empty %}
+                    <p>There are not comments yet</p>
+                    {% endfor %}
+                    {% endif %}
+                    </div>
+                    <br>
+
+                    {% if new_comment %}
+                    <h2>Your comment has been added</h2>
+                    {% else %}
+                    <div class="row">
+                        <div class="container">
+                            <form method="post">
+                            {% csrf_token %}
+							<div class="row">
+								<div class="col-sm-6">
+                                    {{ comment_form.name.label_tag }}
+									<input type="text" id="id_name" name="name" class="form-control"
+										placeholder="Enter your name" aria-invalid="true">
+								</div><!-- col-sm-6 -->
+								<div class="col-sm-6">
+                                    {{ comment_form.email.label_tag }}
+									<input type="email" id="id_email" name="email" class="form-control"
+										placeholder="Enter your email" aria-invalid="true">
+								</div><!-- col-sm-6 -->
+
+								<div class="col-sm-12">
+                                    {{ comment_form.body.label_tag }}
+									<textarea name="body" id="id_body" rows="2" class="text-area-messge form-control"
+										placeholder="Enter your comment" aria-required="true" aria-invalid="false"></textarea >
+								</div><!-- col-sm-12 -->
+                                <br>
+								<div class="col-sm-12">
+                                    <br>
+									<button class="btn btn-success" type="submit" id="form-submit"><b>POST COMMENT</b></button>
+								</div><!-- col-sm-12 -->
+
+							</div><!-- row -->
+						</form>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Details Section End -->
+
+
+
+
+    {% if similar_posts %}
+    <!-- Related Blog Section Begin -->
+    <section class="related-blog spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title related-blog-title">
+                        <h2>Post You May Like</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                {% for ranpost in similar_posts %}
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="blog__item">
+                        <div class="blog__item__pic">
+                            <img src="
+                            {% if ranpost.image %}{{ ranpost.image.url }}{% endif %}" alt="">
+                        </div>
+                        <div class="blog__item__text">
+                            <ul>
+                                {% with comments.count as total_comments %}
+                                <li><i class="fa fa-calendar-o"></i> {{ ranpost.publish }}</li>
+                                <li><i class="fa fa-comment-o"></i> {{ total_comments }}</li>
+                                {% endwith %}
+
+                            </ul>
+                            <h5><a href="">{{ ranpost.title }}</a></h5>
+                            <p>{{ ranpost.body|truncatewords:13 }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!-- Related Blog Section End -->
+    {% endif %}
+
+
+{% endblock content %}
